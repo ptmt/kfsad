@@ -86,6 +86,8 @@ class ApplicationComponent : RComponent<ApplicationProps, ApplicationState>() {
                     }
                 }
             }
+
+            +"Hello, world12345456!"
         }
 
         styledDiv {

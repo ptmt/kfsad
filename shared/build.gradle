@@ -19,8 +19,21 @@ def logback_version = '1.2.3'
 kotlin {
     jvm()
     js {
-        browser()
-        nodejs()
+        browser {
+            testTask {
+
+            }
+        }
+        nodejs {
+            testTask {
+                testLogging {
+                    showExceptions = true
+                    exceptionFormat = org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
+                    showCauses = true
+                    showStackTraces = true
+                }
+            }
+        }
     }
 
     sourceSets {
