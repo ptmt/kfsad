@@ -4,8 +4,8 @@ import model.Post
 import rpc.Transport
 import kotlin.coroutines.CoroutineContext
 
-actual class PostService(coroutineContext: CoroutineContext) {
-    private val transport = Transport(coroutineContext)
+actual class PostService() {
+    private val transport = Transport()
 
     actual suspend fun getPost(id: String): Post {
         return transport.get("getPost", Post.serializer(), "id" to id)

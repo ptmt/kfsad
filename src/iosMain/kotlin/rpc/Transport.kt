@@ -10,7 +10,7 @@ import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
 
-class Transport(private val coroutineContext: CoroutineContext) {
+class Transport() {
     internal suspend fun <T> get(
         url: String,
         deserializationStrategy: KSerializer<T>,
