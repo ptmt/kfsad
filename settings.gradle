@@ -19,3 +19,4 @@ pluginManagement {
 }
 rootProject.name = 'kotlin-full-stack-application-demo'
 
+enableFeaturePreview('GRADLE_METADATA')
