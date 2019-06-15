@@ -10,7 +10,7 @@ import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
 
-class Transport() {
+class Transport {
     internal suspend fun <T> get(
         url: String,
         deserializationStrategy: KSerializer<T>,
@@ -34,7 +34,7 @@ class Transport() {
             url += args.joinToString("&", transform = { "${it.first}=${urlEncode(it.second.toString())}" })
         }
 
-
+        NSLog("fetch $method $url")
         return doRequest(
             HttpMethod.Get, url, headers = mapOf(
                 "Accept" to "application/json",
@@ -70,7 +70,11 @@ private suspend fun doRequest(
         override fun URLSession(session: NSURLSession, task: NSURLSessionTask, didCompleteWithError: NSError?) {
             if (didCompleteWithError == null) {
                 val httpResponse = (task.response()!! as NSHTTPURLResponse)
-                callback.resume(receivedData.string()!!)
+                if (httpResponse.statusCode.toInt() == 200) {
+                    callback.resume(receivedData.string() ?: error("Cannot convert NSData to string"))
+                } else {
+                    callback.resumeWithException(error("HTTP ${httpResponse.statusCode}"))
+                }
             } else {
                 callback.resumeWithException(error(didCompleteWithError.localizedDescription))
             }
@@ -85,10 +89,7 @@ private suspend fun doRequest(
         HttpMethod.Post -> {
             request.addValue("application/x-www-form-urlencoded", "Content-Type")
             request.setHTTPMethod("POST")
-//                val formString = formParameters.entries.joinToString(separator = "&") {
-//                    "${it.key.encodeURIComponent()}=${it.value?.encodeURIComponent()}"
-//                }
-//                request.setHTTPBody(formString.nsData())
+            TODO("POST is not supported")
         }
         HttpMethod.Get -> request.setHTTPMethod("GET")
     }
@@ -99,10 +100,11 @@ private suspend fun doRequest(
 }
 
 fun urlEncode(value: String): String {
-    try {
-        return (value as NSString).stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.alphanumericCharacterSet)!!
+    return try {
+        (value as? NSString)?.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.alphanumericCharacterSet)!!
     } catch (e: Exception) {
-        return value
+        NSLog("urlEncode failed")
+        value
     }
 }
 
