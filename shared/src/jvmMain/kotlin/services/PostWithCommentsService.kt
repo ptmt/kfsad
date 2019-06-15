@@ -2,7 +2,6 @@ package services
 
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
-import kotlinx.coroutines.awaitAll
 import model.PostWithComments
 import rpc.RPCService
 import kotlin.random.Random
@@ -17,7 +16,7 @@ actual class PostWithCommentsService : RPCService {
                 val comments = commentsService.getComments(post.id.toString(), count = Random.nextInt(1, 3))
                 PostWithComments(post, comments)
             }
-        }.awaitAll()
+        }.map { it.await() }
     }
 
     actual suspend fun getPostWithComments(postId: String): PostWithComments {

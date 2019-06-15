@@ -2,10 +2,7 @@ package view
 
 import contrib.ringui.header.ringHeader
 import contrib.ringui.header.ringLogo
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.async
-import kotlinx.coroutines.awaitAll
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import kotlinx.css.padding
 import kotlinx.css.px
 import model.PostWithComments
@@ -38,7 +35,7 @@ interface ApplicationProps : RProps {
 
 class ApplicationState : RState {
     var postWithComments: List<PostWithComments> = emptyList()
-    var users: Map<Int, User> = emptyMap()
+    var users: List<User> = emptyList()
 }
 
 class ApplicationComponent : RComponent<ApplicationProps, ApplicationState>() {
@@ -64,9 +61,7 @@ class ApplicationComponent : RComponent<ApplicationProps, ApplicationState>() {
             val userIds = posts.map { it.post.userId }.toSet()
             val users = userIds
                 .map { async { userService.getUser(it) } }
-                .awaitAll()
-                .toSet()
-                .associateBy { it.id }
+                .map { it.await() }
 
             setState {
                 this.users = users
@@ -89,6 +84,8 @@ class ApplicationComponent : RComponent<ApplicationProps, ApplicationState>() {
                     }
                 }
             }
+
+            +"Hello, world12345456!"
         }
 
         styledDiv {
@@ -103,7 +100,7 @@ class ApplicationComponent : RComponent<ApplicationProps, ApplicationState>() {
                     }
                     postView(
                         postWithComments,
-                        state.users[postWithComments.post.userId],
+                        state.users.find { it.id == postWithComments.post.userId },
                         onMoreComments = {
                             onMoreComment(postWithComments.post.id)
                         })

@@ -16,9 +16,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     let postWithComments = PostWithCommentsService()
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        print("getPostsWithComments")
+        
         postWithComments.getPostsWithComments() { posts in
-            print("posts \(posts.count)")
+            
             let window = UIWindow(frame: UIScreen.main.bounds)
             window.rootViewController = UIHostingController(rootView: Posts(posts: posts, users: [])
             )

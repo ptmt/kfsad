@@ -9,8 +9,7 @@ This application displays a feed containing user-generated posts and comments. A
 It is a [Kotlin Multiplatform](https://kotlinlang.org/docs/reference/multiplatform.html) project.
 
 It uses:
-- [kotlin-multiplatform](https://github.com/JetBrains/kotlin/blob/770a2e3f2d337b84f72dd574d6564913e065b58d/libraries/tools/kotlin-gradle-plugin/src/main/kotlin/org/jetbrains/kotlin/gradle/plugin/KotlinMultiplatformPlugin.kt) plugin for Kotlin compilation;
-- [kotlin-frontend-plugin](https://github.com/Kotlin/kotlin-frontend-plugin) for frontend configuration;
+- `kotlin-multiplatform`, `kotlin-js` and `kotlin-jvm` plugins for Kotlin compilation;
 - [Ktor framework](https://ktor.io) as a web server;
 - [H2](http://www.h2database.com/html/main.html) in-memory database with [Exposed](https://github.com/JetBrains/Exposed) to preload posts at application startup;
 - [kotlinx.serialization](https://github.com/Kotlin/kotlinx.serialization) for client/server (de-)serialization and RPC;
@@ -24,12 +23,20 @@ The "Load more comments" button fetches additional comments for the post using t
 This application has no error handling and has very limited RPC serialization. It's not meant for production use and serves only as a technology example.
 
 ### Useful Gradle tasks
+<<<<<<< HEAD
 `gradle run` runs webpack-dev-server and the Ktor application. You can find logs at `build/logs`.
 
 `gradle stop` stops webpack-dev-server and the Ktor application.
+=======
 
-`gradle bundle` to create static files bundle.
+`gradle run` runs webpack-dev-server and the Ktor application. You can find logs at `build/logs`.
 
+`gradle run -t` runs continuous build (watch mode).
+>>>>>>> 1567225588a5ca8a3da29d59070df9fcf0fcb129
+
+`gradle build` to create static files bundle.
+
+<<<<<<< HEAD
 `gradle webpack-run` runs webpack-dev-server only.
 
 `gradle webpack-stop` stops webpack-dev-server only.
@@ -41,6 +48,15 @@ This application has no error handling and has very limited RPC serialization. I
 `gradle jvmTest` to run common and JVM tests with JUnit.
 
 `gradle runKarmaTests` to run common and JS tests with Mocha and Karma.
+=======
+`gradle :client:run` runs webpack-dev-server only.
+
+`gradle :server:run` runs the Ktor application only.
+
+`gradle :server:test` to run common and JVM tests with JUnit.
+
+`gradle :client:test` to run common and JS tests with Mocha and Karma.
+>>>>>>> 1567225588a5ca8a3da29d59070df9fcf0fcb129
 
 ### Hosts
 webpack-dev-server responds at http://0.0.0.0:8080, the Ktor application responds at http://0.0.0.0:8081.
