@@ -37,11 +37,6 @@ dependencies {
     testImplementation "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
 }
 
-//ktor {
-//    port = 8081
-//    mainClass = "io.ktor.server.netty.EngineMain"
-//}
-
 application {
     mainClassName = 'io.ktor.server.netty.EngineMain'
 }
