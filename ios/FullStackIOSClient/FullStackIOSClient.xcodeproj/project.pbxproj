@@ -7,15 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D43AC7C922B7FF8D00C862D9 /* SharedLib.framework.dSYM in Resources */ = {isa = PBXBuildFile; fileRef = D43AC7C722B7FF8D00C862D9 /* SharedLib.framework.dSYM */; };
+		D43AC7CC22B8003800C862D9 /* SharedLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D43AC7C622B7FF8D00C862D9 /* SharedLib.framework */; };
+		D43AC7CD22B8003800C862D9 /* SharedLib.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D43AC7C622B7FF8D00C862D9 /* SharedLib.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D4D07F5922AEC6CF00EFEC89 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D07F5822AEC6CF00EFEC89 /* AppDelegate.swift */; };
 		D4D07F5B22AEC6CF00EFEC89 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D07F5A22AEC6CF00EFEC89 /* SceneDelegate.swift */; };
 		D4D07F5D22AEC6CF00EFEC89 /* PostRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D07F5C22AEC6CF00EFEC89 /* PostRow.swift */; };
 		D4D07F5F22AEC6D300EFEC89 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D4D07F5E22AEC6D300EFEC89 /* Assets.xcassets */; };
 		D4D07F6222AEC6D300EFEC89 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D4D07F6122AEC6D300EFEC89 /* Preview Assets.xcassets */; };
 		D4D07F6522AEC6D300EFEC89 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D4D07F6322AEC6D300EFEC89 /* LaunchScreen.storyboard */; };
-		D4D07F8022AED04000EFEC89 /* SharedLib.framework.dSYM in Resources */ = {isa = PBXBuildFile; fileRef = D4D07F7F22AED04000EFEC89 /* SharedLib.framework.dSYM */; };
-		D4D07F8222AED0AF00EFEC89 /* SharedLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4D07F8122AED0AF00EFEC89 /* SharedLib.framework */; };
-		D4D07F8322AED0B400EFEC89 /* SharedLib.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D4D07F8122AED0AF00EFEC89 /* SharedLib.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D4D07F8622B2CF3E00EFEC89 /* Avatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D07F8522B2CF3E00EFEC89 /* Avatar.swift */; };
 		D4D07F8922B2D00600EFEC89 /* URLImage in Frameworks */ = {isa = PBXBuildFile; productRef = D4D07F8822B2D00600EFEC89 /* URLImage */; };
 		D4D07F8B22B2D3B100EFEC89 /* Posts.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D07F8A22B2D3B100EFEC89 /* Posts.swift */; };
@@ -23,13 +23,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		D4D07F7422AECE7D00EFEC89 /* Embed Frameworks */ = {
+		D43AC7CE22B8003800C862D9 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				D4D07F8322AED0B400EFEC89 /* SharedLib.framework in Embed Frameworks */,
+				D43AC7CD22B8003800C862D9 /* SharedLib.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -37,6 +37,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		D43AC7C622B7FF8D00C862D9 /* SharedLib.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SharedLib.framework; path = ../../shared/build/bin/ios/SharedLibDebugFramework/SharedLib.framework; sourceTree = "<group>"; };
+		D43AC7C722B7FF8D00C862D9 /* SharedLib.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = SharedLib.framework.dSYM; path = ../../shared/build/bin/ios/SharedLibDebugFramework/SharedLib.framework.dSYM; sourceTree = "<group>"; };
 		D4D07F5522AEC6CF00EFEC89 /* FullStackIOSClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FullStackIOSClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4D07F5822AEC6CF00EFEC89 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D4D07F5A22AEC6CF00EFEC89 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -45,8 +47,6 @@
 		D4D07F6122AEC6D300EFEC89 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		D4D07F6422AEC6D300EFEC89 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D4D07F6622AEC6D300EFEC89 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D4D07F7F22AED04000EFEC89 /* SharedLib.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = SharedLib.framework.dSYM; path = ../../build/bin/ios/SharedLibDebugFramework/SharedLib.framework.dSYM; sourceTree = "<group>"; };
-		D4D07F8122AED0AF00EFEC89 /* SharedLib.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SharedLib.framework; path = ../../build/bin/ios/SharedLibDebugFramework/SharedLib.framework; sourceTree = "<group>"; };
 		D4D07F8522B2CF3E00EFEC89 /* Avatar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Avatar.swift; sourceTree = "<group>"; };
 		D4D07F8A22B2D3B100EFEC89 /* Posts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Posts.swift; sourceTree = "<group>"; };
 		D4D07F8C22B2D42800EFEC89 /* PostDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetails.swift; sourceTree = "<group>"; };
@@ -58,20 +58,28 @@
 			buildActionMask = 2147483647;
 			files = (
 				D4D07F8922B2D00600EFEC89 /* URLImage in Frameworks */,
-				D4D07F8222AED0AF00EFEC89 /* SharedLib.framework in Frameworks */,
+				D43AC7CC22B8003800C862D9 /* SharedLib.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D43AC7CB22B8003800C862D9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		D4D07F4C22AEC6CF00EFEC89 = {
 			isa = PBXGroup;
 			children = (
 				D4D07F5722AEC6CF00EFEC89 /* FullStackIOSClient */,
 				D4D07F5622AEC6CF00EFEC89 /* Products */,
-				D4D07F8122AED0AF00EFEC89 /* SharedLib.framework */,
-				D4D07F7F22AED04000EFEC89 /* SharedLib.framework.dSYM */,
+				D43AC7C622B7FF8D00C862D9 /* SharedLib.framework */,
+				D43AC7C722B7FF8D00C862D9 /* SharedLib.framework.dSYM */,
+				D43AC7CB22B8003800C862D9 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -118,7 +126,7 @@
 				D4D07F5122AEC6CF00EFEC89 /* Sources */,
 				D4D07F5222AEC6CF00EFEC89 /* Frameworks */,
 				D4D07F5322AEC6CF00EFEC89 /* Resources */,
-				D4D07F7422AECE7D00EFEC89 /* Embed Frameworks */,
+				D43AC7CE22B8003800C862D9 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -174,7 +182,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D4D07F6522AEC6D300EFEC89 /* LaunchScreen.storyboard in Resources */,
-				D4D07F8022AED04000EFEC89 /* SharedLib.framework.dSYM in Resources */,
+				D43AC7C922B7FF8D00C862D9 /* SharedLib.framework.dSYM in Resources */,
 				D4D07F6222AEC6D300EFEC89 /* Preview Assets.xcassets in Resources */,
 				D4D07F5F22AEC6D300EFEC89 /* Assets.xcassets in Resources */,
 			);
@@ -329,12 +337,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "FullStackIOSClient/Preview\\ Content";
+				DEVELOPMENT_ASSET_PATHS = "FullStackIOSClient/Preview\\ Content ../../shared/build/bin/ios/SharedLibDebugFramework/SharedLib.framework";
 				DEVELOPMENT_TEAM = 49PJNAT2WC;
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/../../build/bin/ios/SharedLibDebugFramework/",
+					"$(PROJECT_DIR)/../../shared/build/bin/ios/SharedLibDebugFramework/**",
 					"$(PROJECT_DIR)/FullStackIOSClient",
 				);
 				INFOPLIST_FILE = FullStackIOSClient/Info.plist;
@@ -354,12 +362,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "FullStackIOSClient/Preview\\ Content";
+				DEVELOPMENT_ASSET_PATHS = "FullStackIOSClient/Preview\\ Content ../../shared/build/bin/ios/SharedLibDebugFramework/SharedLib.framework";
 				DEVELOPMENT_TEAM = 49PJNAT2WC;
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/../../build/bin/ios/SharedLibDebugFramework/",
+					"$(PROJECT_DIR)/../../shared/build/bin/ios/SharedLibDebugFramework/**",
 					"$(PROJECT_DIR)/FullStackIOSClient",
 				);
 				INFOPLIST_FILE = FullStackIOSClient/Info.plist;

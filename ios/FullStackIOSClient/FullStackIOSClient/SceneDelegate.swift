@@ -20,12 +20,22 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         postWithComments.getPostsWithComments() { posts in
             
             let window = UIWindow(frame: UIScreen.main.bounds)
-            window.rootViewController = UIHostingController(rootView: Posts(posts: posts, users: [])
+            
+            window.rootViewController = UIHostingController(rootView: Posts(posts: [], users: [])
             )
             self.window = window
             window.makeKeyAndVisible()
-            return KotlinUnit()
         }
+//        postWithComments.getPostsWithComments() { posts in
+//
+//
+//            let window = UIWindow(frame: UIScreen.main.bounds)
+//
+//            window.rootViewController = UIHostingController(rootView: Posts(posts: posts, users: [])
+//            )
+//            self.window = window
+//            window.makeKeyAndVisible()
+//      }
         
     }
 

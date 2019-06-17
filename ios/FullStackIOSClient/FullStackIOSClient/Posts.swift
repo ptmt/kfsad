@@ -14,9 +14,9 @@ struct Posts : View {
     var users: [User]
     var body: some View {
         NavigationView {
-            ForEach(posts.identified(by: \.post.id)) { (post: PostWithComments) in
-                NavigationButton(destination: Text("text")) {
-                    PostRow(post: post.post, user: makeUser())
+            List(posts.identified(by: \.post.id)) { (post: PostWithComments) in
+                NavigationButton(destination: PostDetails(postWithComments: post, user: makeUser())) {
+                    PostRow(post: post, user: makeUser())
                 }
             }.navigationBarTitle(Text("FullStack/iOS"), displayMode: .large)
         }
@@ -24,17 +24,20 @@ struct Posts : View {
 }
 
 #if DEBUG
+let postsData = [
+    makePostWithComments(1),
+    makePostWithComments(2),
+    makePostWithComments(3),
+    makePostWithComments(4),
+    makePostWithComments(5)]
 struct Posts_Previews : PreviewProvider {
     static var previews: some View {
-        Posts(posts: [
-            makePostWithComments(),
-            makePostWithComments(),
-            makePostWithComments()],
+        Posts(posts: postsData,
               users: [])
     }
 }
 
-func makePostWithComments() -> PostWithComments {
-return PostWithComments(post: makePost(), comments: [])
+func makePostWithComments(_ id: Int) -> PostWithComments {
+    return PostWithComments(post: makePost(id: id), comments: [])
 }
 #endif

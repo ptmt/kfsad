@@ -1,3 +1,5 @@
+@file:Suppress("UNUSED_PARAMETER")
+
 package rpc
 
 import kotlinx.serialization.KSerializer
@@ -5,10 +7,13 @@ import kotlinx.serialization.json.Json
 import kotlinx.serialization.list
 import platform.Foundation.*
 import platform.darwin.NSObject
+import platform.darwin.dispatch_get_current_queue
+import platform.darwin.dispatch_sync
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
+import kotlin.native.concurrent.freeze
 
 class Transport {
     internal suspend fun <T> get(
@@ -28,7 +33,7 @@ class Transport {
     }
 
     private suspend fun fetch(method: String, vararg args: Pair<String, Any>): String {
-        var url = "/api/$method"
+        var url = "http://localhost:8080/api/$method"
         if (args.isNotEmpty()) {
             url += "?"
             url += args.joinToString("&", transform = { "${it.first}=${urlEncode(it.second.toString())}" })
@@ -44,6 +49,7 @@ class Transport {
     }
 }
 
+@SharedImmutable
 private val configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
 
 private enum class HttpMethod { Get, Post }
@@ -54,11 +60,12 @@ private suspend fun doRequest(
     formParameters: Map<String, String?> = emptyMap(),
     headers: Map<String, String?> = emptyMap()
 ): String = suspendCoroutine { callback ->
-
+    val queue = dispatch_get_current_queue().freeze()
     val delegate = object : NSObject(), NSURLSessionDataDelegateProtocol {
         val receivedData = NSMutableData()
-        @Suppress("UNUSED_PARAMETER")
+
         override fun URLSession(session: NSURLSession, dataTask: NSURLSessionDataTask, didReceiveData: NSData) {
+            initRuntimeIfNeeded()
             receivedData.appendData(didReceiveData)
         }
 
@@ -66,24 +73,25 @@ private suspend fun doRequest(
             callback.resumeWithException(error("HttpRequest did become invalid"))
         }
 
-        @Suppress("UNUSED_PARAMETER")
         override fun URLSession(session: NSURLSession, task: NSURLSessionTask, didCompleteWithError: NSError?) {
             if (didCompleteWithError == null) {
-                val httpResponse = (task.response()!! as NSHTTPURLResponse)
-                if (httpResponse.statusCode.toInt() == 200) {
-                    callback.resume(receivedData.string() ?: error("Cannot convert NSData to string"))
-                } else {
-                    callback.resumeWithException(error("HTTP ${httpResponse.statusCode}"))
+                val data = receivedData.string().freeze()
+                NSLog("current thread before sync %@",  NSThread.currentThread)
+                dispatch_sync(queue) {
+                    NSLog("current thread after sync %@",  NSThread.currentThread)
+                    callback.resume(data ?: error("Cannot convert NSData to string"))
                 }
             } else {
                 callback.resumeWithException(error(didCompleteWithError.localizedDescription))
             }
         }
     }
-    val queue = NSOperationQueue.mainQueue
-    val session = NSURLSession.sessionWithConfiguration(configuration, delegate, queue)
+
+    NSLog("current queue %@", queue)
+    NSLog("current thread %@",  NSThread.currentThread)
+    val session = NSURLSession.sessionWithConfiguration(configuration, delegate, null)
     val request =
-        NSMutableURLRequest.requestWithURL(NSURL.URLWithString(url)!!, NSURLRequestUseProtocolCachePolicy, 30.0)
+        NSMutableURLRequest.requestWithURL(NSURL.URLWithString(url)!!, NSURLRequestUseProtocolCachePolicy, 15.0)
 
     when (method) {
         HttpMethod.Post -> {

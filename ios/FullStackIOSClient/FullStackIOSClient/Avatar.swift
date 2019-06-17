@@ -10,21 +10,21 @@ import SwiftUI
 import URLImage
 
 struct Avatar : View {
-    var imageUrl: String
-    
+    var username: String
+    var size: Length = 40.0
     var body: some View {
-        URLImage(URL(string: imageUrl)!)
-            .frame(width: 50, height: 50)
+        URLImage(URL(string: "http://i.pravatar.cc/\(size)?u=\(username)")!)
+            .frame(width: size, height: size)
             .cornerRadius(4)
             .clipped()
-            .shadow(radius: 50)
+            .shadow(radius: 5)
     }
 }
 
 #if DEBUG
 struct Avatar_Previews : PreviewProvider {
     static var previews: some View {
-        Avatar(imageUrl: "https://i.pravatar.cc/100?u=Maxime_Nienow&dpr=2&size=100")
+        Avatar(username: "Maxime_Nienow")
     }
 }
 #endif

@@ -4,9 +4,13 @@ import model.PostWithComments
 import rpc.Transport
 import kotlinx.coroutines.*
 import platform.Foundation.NSLog
+import kotlin.native.concurrent.TransferMode
+import kotlin.native.concurrent.Worker
+import kotlin.native.concurrent.freeze
 
 actual class PostWithCommentsService {
-    private val transport = Transport()
+    private val transport = Transport().freeze()
+    private val backgroundWorker = Worker.start()
 
     actual suspend fun getPostsWithComments(): List<PostWithComments> {
         return transport.getList("getPostsWithComments", PostWithComments.serializer())
@@ -17,12 +21,15 @@ actual class PostWithCommentsService {
     }
 
     fun getPostsWithComments(completion: (List<PostWithComments>) -> Unit) {
-        NSLog("getPostsWithComments kotlin")
-        GlobalScope.launch {
-            NSLog("getPostsWithComments kotlin inside coroutine")
-            val posts = transport.getList("getPostsWithComments", PostWithComments.serializer())
+        val future = backgroundWorker.execute(TransferMode.SAFE, { transport to PostWithComments.serializer() }) { (t, serializer) ->
+            val posts = runBlocking {
+                t.getList("getPostsWithComments", serializer)
+            }
             NSLog("getPostsWithComments posts ${posts.size}")
-            completion(posts)
+            posts.freeze()
+        }
+        future.consume {
+            completion(it)
         }
     }
 

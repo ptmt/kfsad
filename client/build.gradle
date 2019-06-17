@@ -2,6 +2,8 @@ plugins {
     id 'org.jetbrains.kotlin.js'
 }
 
+import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfigWriter.DevServer
+
 repositories {
     mavenLocal()
     jcenter()
@@ -18,20 +20,9 @@ kotlin {
         useCommonJs()
         browser {
             runTask {
-                devServer {
-                    enabled = true
-
-                    // webpack dev server configuration
-                    open = true
-                    inline = true
-                    watch = true // in gradle continues mode
-
-                    port = 8080
-
-                    proxy {
-                        url = "http://0.0.0.0:8081"
-                    }
-                }
+                devServer = new DevServer(true, false, true, true, false, 8080, 
+                        ["/api":"http://0.0.0.0:8081"], 
+                        [compilation.output.resourcesDir.canonicalPath])
             }
         }
     }
